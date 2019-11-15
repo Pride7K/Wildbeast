@@ -1,0 +1,343 @@
+body, p, h1, ul, li, blockquote {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    font-family: 'Vollkorn', Georgia, 'Times New Roman', Times, serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/*  GRID GEREAL */
+
+.estrutura {
+    display: grid;
+    grid-template-columns: minmax(160px, 1fr) 3fr 300px;
+    grid-template-areas: "header header header" "sidenav conteudo anuncios" "footer footer footer";
+}
+
+@media(max-width:1200px) {
+    .estrutura {
+        grid-template-areas: "header header header" "sidenav conteudo conteudo" "sidenav anuncios anuncios" "footer footer footer";
+    }
+}
+
+@media(max-width:760px) {
+    .estrutura {
+        grid-template-columns: 100%;
+        grid-template-areas: "header" "sidenav" "conteudo" "anuncios" "footer";
+    }
+}
+
+/* HEADER */
+
+.header {
+    grid-area: header;
+    background: linear-gradient(135deg, #8844ee, #B07DFB);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.logo {
+    max-width: 200px;
+}
+
+.header nav ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header nav a {
+    display: block;
+    padding: 10px;
+    color: white;
+    font-size: 1.125em;
+    background-color: rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    transition: .1s;
+}
+
+.header nav a:hover {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+/* ESSE SINAL DE MAIS SERVE PARA
+ APLICAR O ESTILO SE HOUVER UM LI SEGUIDO DE OUTRO */
+
+.header li+li {
+    margin-left: 30px;
+}
+
+@media(max-width:760px) {
+    .header {
+        grid-template-columns: auto;
+    }
+    .logo {
+        margin-bottom: 20px;
+    }
+    .header nav a {
+        font-size: 1em;
+    }
+    .header li+li {
+        margin-left: 10px;
+    }
+}
+
+/**********************************************************************************/
+
+/* SIDENAV */
+
+.sidenav {
+    grid-area: sidenav;
+    background: #fafbfc;
+    padding: 30px;
+}
+
+.sidenav li a {
+    display: block;
+    min-width: 60px;
+    max-width: 100px;
+    /* margin top, margin left , margin bottom  e  margin right*/
+    margin: 0 auto 30px auto;
+    /*background-color: royalblue;*/
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
+    /* ease-out serve para dizer para ter uma saida suave */
+    transition: .1 ease-out;
+}
+
+.sidenav li a:hover {
+    background: #B07DFB;
+}
+
+@keyframes seta {
+    from {
+        right: 25px;
+    }
+    to {
+        right: 15px;
+    }
+}
+
+@media(max-width:760px) {
+    .sidenav {
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .sidenav::after {
+        content: "→";
+        position: absolute;
+        top: 5px;
+        right: 25px;
+        color: rgba(0, 0, 0, .3);
+        animation: seta .5s ease-in 0s infinite alternate;
+    }
+    .sidenav ul {
+        display: flex;
+    }
+    .sidenav ul li {
+        flex: 1 0 60px;
+    }
+    .sidenav {
+        padding: 0 30px;
+    }
+    .sidenav li a {
+        margin: 30px 30px 30px 0;
+    }
+}
+
+/**********************************************************************************/
+
+/* CONTEUDO */
+
+.conteudo {
+    grid-area: conteudo;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+}
+
+@media(max-width:600px) {
+    .conteudo {
+        grid-template-columns: auto;
+    }
+}
+
+.col-wide {
+    /* -1 serve para dizer que é de ponta a ponta*/
+    grid-column: 1/-1;
+}
+
+.imagem-1 {
+    grid-row: span 2;
+    align-self: end;
+}
+
+.imagem-2 {
+    align-self: end;
+}
+
+/**********************************************************************************/
+
+/* ANUNCIOS */
+
+.anuncios {
+    grid-area: anuncios;
+    background: #fafbfc;
+    display: grid;
+    align-content: start;
+    padding: 30px;
+    /* margin entre os elementos */
+    /* exemplo em uma coluna que há 2 itens um em cima do outro
+    havera uma margin apenas entre eles ou seja de cima e baixo e 
+    não dos lados*/
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+}
+
+/**********************************************************************************/
+
+/* ESTILOS GERAIS DA PAGINA*/
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+    color: rgba(0, 0, 0, .7);
+}
+
+.informacoes p+p {
+    margin-top: 30px;
+}
+
+/* TITULO */
+
+.titulo {
+    color: #B07DFB;
+}
+
+.titulo h1 {
+    font-size: 3.75em;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.titulo span {
+    font-size: 0.875em;
+    font-style: italic;
+}
+
+/* CARACTERISTICAS */
+
+.caracteristicas {
+    display: flex;
+    align-items: flex-start;
+}
+
+.caracteristicas span {
+    /* block é pra dizer pra pegar de ponta a ponta */
+    display: block;
+    color: #B07DFB;
+}
+
+.caracteristicas>div {
+    width: 80px;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
+    background: linear-gradient(135deg, #8844ee, #B07DFB);
+}
+
+.caracteristicas>div:first-child {
+    margin-right: 30px;
+}
+
+.numero {
+    font-size: 3em;
+    line-height: 1;
+    margin: 10px auto;
+}
+
+.rotulo {
+    position: relative;
+    top: 2px;
+    background: white;
+    border-radius: 0 0 5px 5px;
+    padding: 5px 0;
+}
+
+.destaque {
+    font-size: 0.875em;
+    color: #B07DFB;
+    max-width: 16em;
+}
+
+.citacao, .atributos {
+    align-self: start;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
+    background: linear-gradient(135deg, #8844ee, #B07DFB);
+}
+
+.citacao p, cite {
+    font-size: 1.5em;
+    font-style: italic;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    color: white;
+}
+
+.citacao cite {
+    font-size: 1.125em;
+}
+
+.atributos li {
+    color: white;
+    font-family: Courier, monospace;
+    font-size: 1.125em;
+    padding: 15px;
+}
+
+.atributos li+li {
+    border-top: 2px solid #B07DFB;
+}
+
+/**********************************************************************************/
+
+/* FOOTER */
+
+.footer {
+    grid-area: footer;
+    background: linear-gradient(135deg, #8844ee, #B07DFB);
+}
+
+.footer p {
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
